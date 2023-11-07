@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Hyperf\Metric\Adapter\Prometheus;
 
 use Hyperf\Metric\Contract\CounterInterface;
-use Prometheus\CollectorRegistry;
+use Prometheus\RegistryInterface;
 use Prometheus\Exception\MetricsRegistrationException;
 
 class Counter implements CounterInterface
@@ -27,7 +27,7 @@ class Counter implements CounterInterface
     /**
      * @throws MetricsRegistrationException
      */
-    public function __construct(protected CollectorRegistry $registry, string $namespace, string $name, string $help, array $labelNames)
+    public function __construct(protected RegistryInterface $registry, string $namespace, string $name, string $help, array $labelNames)
     {
         $this->counter = $registry->getOrRegisterCounter($namespace, $name, $help, $labelNames);
     }

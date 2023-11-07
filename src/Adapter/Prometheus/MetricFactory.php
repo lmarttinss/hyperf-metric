@@ -31,8 +31,8 @@ use Hyperf\Metric\Exception\RuntimeException;
 use Hyperf\Metric\MetricFactoryPicker;
 use Hyperf\Stringable\Str;
 use Hyperf\Support\Network;
-use Prometheus\CollectorRegistry;
 use Prometheus\Exception\MetricsRegistrationException;
+use Prometheus\RegistryInterface;
 use Prometheus\RenderTextFormat;
 use Psr\Http\Message\RequestInterface;
 
@@ -42,7 +42,7 @@ class MetricFactory implements MetricFactoryInterface
 
     public function __construct(
         private ConfigInterface $config,
-        private CollectorRegistry $registry,
+        private RegistryInterface $registry,
         private GuzzleClientFactory $guzzleClientFactory,
         private StdoutLoggerInterface $logger,
         private ServerFactory $factory

@@ -12,7 +12,7 @@ declare(strict_types=1);
 namespace Hyperf\Metric\Adapter\Prometheus;
 
 use Hyperf\Metric\Contract\GaugeInterface;
-use Prometheus\CollectorRegistry;
+use Prometheus\RegistryInterface;
 use Prometheus\Exception\MetricsRegistrationException;
 
 class Gauge implements GaugeInterface
@@ -27,7 +27,7 @@ class Gauge implements GaugeInterface
     /**
      * @throws MetricsRegistrationException
      */
-    public function __construct(protected CollectorRegistry $registry, string $namespace, string $name, string $help, array $labelNames)
+    public function __construct(protected RegistryInterface $registry, string $namespace, string $name, string $help, array $labelNames)
     {
         $this->gauge = $registry->getOrRegisterGauge($namespace, $name, $help, $labelNames);
     }
